@@ -1,6 +1,6 @@
 import os,urllib
 
-DIR = os.path.join(os.path.expanduser('~'),'Desktop/Bing Wallpaper/')
+DIR = os.path.join(os.path.expanduser('~'),'Pictures/Bing Wallpaper/')
 wallpapers = []
 #Make a Directory if Bing Wallpaper does not exists
 def make_directory():
@@ -31,7 +31,6 @@ def make_list():
 def appendToList(image):
     with open('list_of_wallpaper.txt','a') as f:
         f.write(image+' ')
-    return
 
 
 def check_list(name):
@@ -47,18 +46,18 @@ def download_file(url):
     file_name = url.split('/')[-1]
     image = file_name.split("_")[0]
 
+    print "Accessing Archieve..."
     #Check wheather the wallpaper already in Bing Wallpaper Directory
     if check_list(image):
-        print "Wallpaper", file_name,'already exists..'
-        return
+        return 0
 
     #appending to List
     appendToList(image)
 
     os.chdir(DIR)
-
+    print "Downloading...."
     pic = urllib.urlopen(url)
     with open(file_name,'w') as f:
         f.write(pic.read())
-    print file_name,"downloaded..."
-    print "Check",DIR
+    print file_name,'downloaded.'
+    return 1
