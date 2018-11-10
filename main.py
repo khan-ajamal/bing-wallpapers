@@ -1,4 +1,5 @@
-import urllib,json,sys
+import json,sys
+from urllib import request as urllib
 import wallpaper as w
 
 MARKET = ['IN','US','AU','NZ','CN','GB','ZA']
@@ -21,8 +22,8 @@ def find_image_url():
                     url = 'http://www.bing.com' + images[i]['url']
                 count += w.download_file(url)
             except Exception as e:
-                print str(e)
-    print count,'wallpaper downloaded..'
+                print (str(e))
+    print (count,'wallpaper downloaded..')
 
 if __name__ == '__main__':
     w.make_directory()
